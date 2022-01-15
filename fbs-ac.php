@@ -33,8 +33,8 @@ function fbs_ac_contact_form($atts,$content){
         $email = $_POST['fas_ac_email'];
         $subject = $_POST['fas_ac_subject'];
         $message = $_POST['fbs_ac_message'];
+        $submit = true;
     }
-    $submit = true;
 
     // Here write Sent mail code
 
