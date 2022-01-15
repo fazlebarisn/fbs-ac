@@ -41,15 +41,24 @@ function fbs_author_contact_info($content){
 
     ob_start();
 
+    // Action hook
     $name = "Sony";
     $age = 30;
     do_action('fbs_ac_bio_content_top' , $name, $age );
 
     ?>
         <div>
-            Twitter : <?php echo $twitter ?><br>
-            Facebook : <?php echo $facebook ?><br>
-            Bio : <?php echo $bio ?>
+            <?php
+                // filter hook
+                $your_name = "Sony";
+                $msg = "Hello, Welcome ";
+                echo apply_filters('fbs_ac_welcome_msg' , $msg, $your_name);
+            ?>
+            <div>
+                Twitter : <?php echo $twitter ?><br>
+                Facebook : <?php echo $facebook ?><br>
+                Bio : <?php echo $bio ?>
+            </div>
         </div>
     <?php
 
@@ -66,3 +75,10 @@ function fbs_ac_bio_content_top_callback($name,$age){
     echo "<h3>My name is $name and my age is $age</h3>";
 }
 add_action('fbs_ac_bio_content_top' , 'fbs_ac_bio_content_top_callback',10,2);
+
+// testing our filter hooks
+function fbs_ac_welcome_msg_callback($msg,$your_name){
+    $your_name = "Gablim";
+    return $msg . $your_name;
+}
+add_filter('fbs_ac_welcome_msg','fbs_ac_welcome_msg_callback',10,2);
