@@ -27,7 +27,23 @@ function fbs_ac_contact_form($atts,$content){
         'submit' => __('Send Email' , 'fbs'),
     ),$atts);
 
+    $submit = false;
+    if( isset($_POST['fas_ac_submit']) ){
+        $name = $_POST['fas_ac_name'];
+        $email = $_POST['fas_ac_email'];
+        $subject = $_POST['fas_ac_subject'];
+        $message = $_POST['fbs_ac_message'];
+    }
+    $submit = true;
+
+    // Here write Sent mail code
+
     ob_start();
+    
+    if($submit){
+        _e("Mail Send Successfully!" , "fbs");
+    } 
+
     ?>
     <form action="" id="fbs_ac_contact" method="post">
         <p>
@@ -53,4 +69,4 @@ function fbs_ac_contact_form($atts,$content){
     <?php
     return ob_get_clean();
 }
-add_shortcode('fbs_contuct' , 'fbs_ac_contact_form');
+add_shortcode('fbs_ac_contact' , 'fbs_ac_contact_form');
