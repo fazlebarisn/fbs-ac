@@ -20,65 +20,37 @@ This is a free plugin
 
 defined('ABSPATH') or die('Nice Try!');
 
-function fbs_user_contact_methods($methods){
-    $methods['twitter'] = __('Twitter' , 'fbs');
-    $methods['facebook'] = __('Facebook' , 'fbs');
-    return $methods;
-}
+function fbs_ac_contact_form($atts,$content){
 
-add_filter('user_contactmethods','fbs_user_contact_methods');
-
-function fbs_author_contact_info($content){
-
-    global $post;
-
-    $author_id = $post->post_author;
-    $author = get_user_by( 'id' , $author_id );
-    //var_dump($author_name);
-    $twitter = get_user_meta($author->ID,'twitter',true);
-    $facebook = get_user_meta($author->ID,'facebook',true);
-    $bio = get_user_meta($author->ID,'description',true);
+    $atts = shortcode_atts(array(
+        'email' => get_option('admin_email'),
+        'submit' => __('Send Email' , 'fbs'),
+    ),$atts);
 
     ob_start();
-
-    // Action hook
-    $name = "Sony";
-    $age = 30;
-    do_action('fbs_ac_bio_content_top' , $name, $age );
-
     ?>
-        <div>
-            <?php
-                // filter hook
-                $your_name = "Sony";
-                $msg = "Hello, Welcome ";
-                echo apply_filters('fbs_ac_welcome_msg' , $msg, $your_name);
-            ?>
-            <div>
-                Twitter : <?php echo $twitter ?><br>
-                Facebook : <?php echo $facebook ?><br>
-                Bio : <?php echo $bio ?>
-            </div>
-        </div>
+    <form action="" id="fbs_ac_contact" method="post">
+        <p>
+            <label for="name">Name</label>
+            <input type="text" name="fas_ac_name" value="">
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="email" name="fas_ac_email" value="">
+        </p>
+        <p>
+            <label for="subject">Subject</label>
+            <input type="text" name="fas_ac_subject" value="">
+        </p>
+        <p>
+            <label for="message">Message</label>
+            <textarea name="fbs_ac_message" id="" cols="30" rows="5"></textarea>
+        </p>
+        <p>
+            <input type="submit" name="fas_ac_submit" value="<?php echo esc_attr(['submit']); ?>">
+        </p>
+    </form>
     <?php
-
-    $author_info = ob_get_clean();
-
-    return $content . $author_info;
+    return ob_get_clean();
 }
-
-add_filter('the_content','fbs_author_contact_info');
-
-// our action hook testing
-function fbs_ac_bio_content_top_callback($name,$age){
-    $name = "Rony";
-    echo "<h3>My name is $name and my age is $age</h3>";
-}
-add_action('fbs_ac_bio_content_top' , 'fbs_ac_bio_content_top_callback',10,2);
-
-// testing our filter hooks
-function fbs_ac_welcome_msg_callback($msg,$your_name){
-    $your_name = "Gablim";
-    return $msg . $your_name;
-}
-add_filter('fbs_ac_welcome_msg','fbs_ac_welcome_msg_callback',10,2);
+add_shortcode('fbs_contuct' , 'fbs_ac_contact_form');
