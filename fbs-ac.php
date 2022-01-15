@@ -47,7 +47,7 @@ function fbs_ac_contact_form($atts,$content){
             <textarea name="fbs_ac_message" id="" cols="30" rows="5"></textarea>
         </p>
         <p>
-            <input type="submit" name="fas_ac_submit" value="<?php echo esc_attr(['submit']); ?>">
+            <input type="submit" name="fas_ac_submit" value="<?php echo esc_attr( $atts['submit'] ); ?>">
         </p>
     </form>
     <?php
