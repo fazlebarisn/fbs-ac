@@ -41,6 +41,10 @@ function fbs_author_contact_info($content){
 
     ob_start();
 
+    $name = "Sony";
+    $age = 30;
+    do_action('fbs_ac_bio_content_top' , $name, $age );
+
     ?>
         <div>
             Twitter : <?php echo $twitter ?><br>
@@ -55,3 +59,10 @@ function fbs_author_contact_info($content){
 }
 
 add_filter('the_content','fbs_author_contact_info');
+
+// our action hook testing
+function fbs_ac_bio_content_top_callback($name,$age){
+    $name = "Rony";
+    echo "<h3>My name is $name and my age is $age</h3>";
+}
+add_action('fbs_ac_bio_content_top' , 'fbs_ac_bio_content_top_callback',10,2);
