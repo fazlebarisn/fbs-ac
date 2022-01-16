@@ -12,6 +12,7 @@ Text Domain: fbsac
 
 defined('ABSPATH') or die('Nice Try!');
 
+require_once __DIR__ . "vendor/autoload.php";
 /**
  * The main class
  */

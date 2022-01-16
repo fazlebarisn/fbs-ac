@@ -1,7 +1,7 @@
 {
     "name": "sony/fbs-ac",
     "description": "New plugin for address book",
-    "type": "wordpress\u001b[C-plugin",
+    "type": "wordpress-plugin",
     "license": "GPLv2",
     "authors": [
         {
@@ -10,5 +10,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Fbs\\Ac\\": "includes/"
+        },
+        "files":[]
+    }
 }
