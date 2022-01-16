@@ -18,6 +18,16 @@ defined('ABSPATH') or die('Nice Try!');
 
  final class FbsAc{
 
+    private function __construct()
+    {
+        
+    }
+
+    /**
+     * initilize a singileton 
+     *
+     * @return \FbsAc class
+     */
      public static function init(){
 
          static $instance = false;
@@ -30,3 +40,15 @@ defined('ABSPATH') or die('Nice Try!');
      }
 
  }
+
+ /**
+  * Initializes the main plugin
+  *
+  * @return \FbsAc class
+  */
+ function fbsAc(){
+     return FbsAc::init();
+ }
+
+ // kick-off the plugin
+ fbsAc();
