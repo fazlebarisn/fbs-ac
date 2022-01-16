@@ -31,6 +31,8 @@ defined('ABSPATH') or die('Nice Try!');
         $this->defineConstants();
 
         register_activation_hook( __FILE__ , [ $this , 'activate'] );
+
+        add_action( 'plugins_loaded' , [ $this , 'initPlugin'] );
     }
 
     /**
@@ -65,6 +67,15 @@ defined('ABSPATH') or die('Nice Try!');
      }
 
      /**
+      * Initialize the plugin
+      *
+      * @return void
+      */
+     public function initPlugin(){
+
+     }
+
+     /**
       * do stuff when plugin install
       *
       * @return void
@@ -77,7 +88,7 @@ defined('ABSPATH') or die('Nice Try!');
             update_option( 'fbs_ac_installed' , time() );
         }
 
-        // Which version install at the begening
+        // what is the version number when first install
         update_option( 'fbs_ac_version' , FBS_AC_VERSION );
 
      }

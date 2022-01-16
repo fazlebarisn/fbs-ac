@@ -1,0 +1,14 @@
+{
+    "name": "sony/fbs-ac",
+    "description": "New plugin for address book",
+    "type": "wordpress\u001b[C-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Fazle Bari",
+            "email": "fazlebarisn@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
