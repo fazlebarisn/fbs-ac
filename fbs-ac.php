@@ -12,7 +12,7 @@ Text Domain: fbsac
 
 defined('ABSPATH') or die('Nice Try!');
 
-require_once __DIR__ . "vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 /**
  * The main class
  */
@@ -74,6 +74,12 @@ require_once __DIR__ . "vendor/autoload.php";
       */
      public function initPlugin(){
 
+        if( is_admin() ){
+            new Fbs\Ac\Admin();
+        }else{
+            new \Fbs\Ac\Frontend();
+        }
+        
      }
 
      /**
