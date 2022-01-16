@@ -29,6 +29,8 @@ defined('ABSPATH') or die('Nice Try!');
     private function __construct()
     {
         $this->defineConstants();
+
+        register_activation_hook( __FILE__ , [ $this , 'activate'] );
     }
 
     /**
@@ -47,12 +49,37 @@ defined('ABSPATH') or die('Nice Try!');
          return $instance;
      }
 
+     /**
+      * Define plugin constants
+      *
+      * @return constants
+      */
      public function defineConstants(){
+
          define( 'FBS_AC_VERSION' , self::version );
          define( 'FBS_AC_FILE' , __FILE__ );
          define( 'FBS_AC_PATH' , __DIR__ );
          define( 'FBS_AC_URL' , plugins_url( '' , FBS_AC_FILE ) );
          define( 'FBS_AC_ASSETS' , FBS_AC_URL . '/assets' );
+
+     }
+
+     /**
+      * do stuff when plugin install
+      *
+      * @return void
+      */
+     public function activate(){
+
+        // when first install
+        $installed = get_option( 'fbs_ac_installed' );
+        if( !$installed ){
+            update_option( 'fbs_ac_installed' , time() );
+        }
+
+        // Which version install at the begening
+        update_option( 'fbs_ac_version' , FBS_AC_VERSION );
+
      }
 
  }
@@ -69,4 +96,4 @@ defined('ABSPATH') or die('Nice Try!');
  // kick-off the plugin
  fbsAc();
 
- //var_dump( fbsAc());
+ //var_dump( $installed );
