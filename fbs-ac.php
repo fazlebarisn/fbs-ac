@@ -18,9 +18,17 @@ defined('ABSPATH') or die('Nice Try!');
 
  final class FbsAc{
 
+    /**
+     * defien plugin version
+     */
+    const version = "1.0.0";
+
+    /**
+     * class constructor
+     */
     private function __construct()
     {
-        
+        $this->defineConstants();
     }
 
     /**
@@ -39,6 +47,14 @@ defined('ABSPATH') or die('Nice Try!');
          return $instance;
      }
 
+     public function defineConstants(){
+         define( 'FBS_AC_VERSION' , self::version );
+         define( 'FBS_AC_FILE' , __FILE__ );
+         define( 'FBS_AC_PATH' , __DIR__ );
+         define( 'FBS_AC_URL' , plugins_url( '' , FBS_AC_FILE ) );
+         define( 'FBS_AC_ASSETS' , FBS_AC_URL . '/assets' );
+     }
+
  }
 
  /**
@@ -52,3 +68,5 @@ defined('ABSPATH') or die('Nice Try!');
 
  // kick-off the plugin
  fbsAc();
+
+ //var_dump( fbsAc());
